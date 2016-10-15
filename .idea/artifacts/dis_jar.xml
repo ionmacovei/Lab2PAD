@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dis:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/dis_jar</output-path>
+    <root id="archive" name="d2c.jar">
+      <element id="module-output" name="d2c-client-app" />
+      <element id="module-output" name="d2c-service" />
+      <element id="module-output" name="d2c-sever-app" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.3.1/commons-lang3-3.3.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

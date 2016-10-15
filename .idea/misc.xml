@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="IdProvider" IDEtalkID="27BEFA01337C09410CA8C167F030707A" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/d2c-client-app/pom.xml" />
+        <option value="$PROJECT_DIR$/d2c-client/pom.xml" />
+        <option value="$PROJECT_DIR$/d2c-descovery-service/pom.xml" />
+        <option value="$PROJECT_DIR$/d2c-discovery-service/pom.xml" />
+        <option value="$PROJECT_DIR$/d2c-sever-app/pom.xml" />
+        <option value="$PROJECT_DIR$/d2c-sever/pom.xml" />
+        <option value="$PROJECT_DIR$/d2c-transport-service/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
+
