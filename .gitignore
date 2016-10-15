@@ -68,12 +68,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-.gitignore
+
 .idea/
-d2c-client-app/
-d2c-service/
-d2c-sever-app/
-d2c.iml
 out/
-pom.xml
-src/
+
