@@ -21,10 +21,9 @@ public class App1 {
 
         InetSocketAddress serverLocation = new InetSocketAddress("127.0.0.1", dataServerPort);
         System.out.println("[INFO] -----------------------------------------\n" +
-                "[INFO] Server is running... on " + dataServerPort);
+                "[INFO] Node is running... on " + dataServerPort);
 
-        new DiscoveryListener(serverLocation)
-                .start();
+        new DiscoveryListener(new InetSocketAddress("127.0.0.1", dataServerPort)).start();
 
         TransportListener transportListener = new TransportListener(dataServerPort);
         transportListener.start();

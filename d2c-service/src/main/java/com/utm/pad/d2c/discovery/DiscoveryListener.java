@@ -19,9 +19,7 @@ public class DiscoveryListener extends Thread {
 
     @Override
     public void run() {
-        sendDataServerLocation(
-                receiveClientRequest(),
-                new Location(dataServerAddress));
+        sendDataServerLocation(receiveClientRequest(), new Location(dataServerAddress));
     }
 
     /**
