@@ -32,7 +32,7 @@ public class Node implements Runnable {
 
     @Override
     public void run() {
-        DiscoveryListener discoveryListener = new DiscoveryListener(nodeLocation.getLocation());
+        DiscoveryListener discoveryListener = new DiscoveryListener(nodeLocation);
         discoveryListener.start();
         TransportListener transportListener = new TransportListener(nodeLocation.getLocation().getPort(), locations, employees);
         transportListener.start();

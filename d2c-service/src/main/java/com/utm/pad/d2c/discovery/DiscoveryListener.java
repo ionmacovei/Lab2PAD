@@ -11,16 +11,16 @@ import static org.apache.commons.lang3.SerializationUtils.deserialize;
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class DiscoveryListener extends Thread {
-    InetSocketAddress dataServerAddress;
+    Location dataServerAddress;
 
 
-    public DiscoveryListener(InetSocketAddress dataServerAddress) {
+    public DiscoveryListener(Location dataServerAddress) {
         this.dataServerAddress = dataServerAddress;
     }
 
     @Override
     public void run() {
-        sendDataServerLocation(receiveClientRequest(), new Location(dataServerAddress));
+        sendDataServerLocation(receiveClientRequest(), dataServerAddress);
     }
 
     /**

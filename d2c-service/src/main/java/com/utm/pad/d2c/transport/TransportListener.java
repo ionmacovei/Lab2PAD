@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.apache.commons.lang3.SerializationUtils.serialize;
@@ -60,7 +61,7 @@ public class TransportListener extends Thread {
                     if (conectionPorts.size() >= 1) {
                         conectionPorts.forEach(location -> {
                             try {
-                                employees.addAll(TransportClient.getEmployeesFrom(location, "maven"));
+                                employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -72,6 +73,18 @@ public class TransportListener extends Thread {
                     socket.close();
                     isAccepted = false;
                 } else {
+                    Integer port = Integer.parseInt(conectorName);
+                    deleteMavenFromList(port, conectionPorts);
+                    if (conectionPorts.size() >= 1) {
+                        conectionPorts.forEach(location -> {
+                            try {
+                                employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+
+                    }
                     Employee[] s = new Employee[employees.size()];
                     serialize((Employee[]) employees.toArray(s), out);
                     socket.close();
@@ -86,6 +99,19 @@ public class TransportListener extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private List<Location> deleteMavenFromList(Integer port, List<Location> locations) {
+
+
+        Iterator<Location> l = locations.iterator();
+        while (l.hasNext()) {
+            Location o = l.next();
+            if (o.getLocation().getPort() == port)
+                l.remove();
+        }
+
+        return locations;
     }
 
     private ArrayList<Employee> getEmployees() {

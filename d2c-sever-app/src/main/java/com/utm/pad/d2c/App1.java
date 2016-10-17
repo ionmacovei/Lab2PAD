@@ -23,20 +23,29 @@ public class App1 {
             dataServerPort = Integer.parseInt(args[0]);
 
         }
-        Location l1 = new Location("127.0.0.1", 9001);
-        Location l2 = new Location("127.0.0.1", 9002);
+        Location l1 = new Location("127.0.0.1", 9001, 3);
+        Location l2 = new Location("127.0.0.1", 9002, 2);
+        Location l3 = new Location("127.0.0.1", 9003, 1);
+        Location l4 = new Location("127.0.0.1", 9004, 1);
+        Location l5 = new Location("127.0.0.1", 9005, 1);
+
+
         // InetSocketAddress serverLocation = new InetSocketAddress("127.0.0.1", dataServerPort);
         System.out.println("[INFO] -----------------------------------------\n" +
                 "[INFO] Node is running... on " + dataServerPort);
+
+        //Nod 1
         List<Employee> employees1 = new ArrayList<Employee>() {{
             add(new Employee("Laur", "Balaur", "Povesti", 501.0));
             add(new Employee("Fat", "Frumos", "Basme", 502.0));
         }};
         List<Location> locations1 = new ArrayList<Location>();
         locations1.add(l2);
+        locations1.add(l4);
+        locations1.add(l5);
 
         new Node("A", l1, locations1, employees1).run();
-
+        //nodu 2
         List<Employee> employees2 = new ArrayList<Employee>() {{
             add(new Employee("Ileana", "Consinzeana", "Basme", 503.0));
             add(new Employee("Danila", "Prepeleac", "Basme", 304.0));
@@ -44,7 +53,32 @@ public class App1 {
         }};
         List<Location> locations2 = new ArrayList<Location>();
         locations2.add(l1);
-        new Node("A", l2, locations2, employees2).run();
+        locations2.add(l3);
+        new Node("B", l2, locations2, employees2).run();
+
+        // nodu 3
+        List<Employee> employees3 = new ArrayList<Employee>() {{
+            add(new Employee("Ion", "Macovei", "Basme", 503.0));
+        }};
+        List<Location> locations3 = new ArrayList<Location>();
+        locations3.add(l2);
+        new Node("C", l3, locations3, employees3).run();
+
+        // nodu 4
+        List<Employee> employees4 = new ArrayList<Employee>() {{
+            add(new Employee("Vasea", "vasea", "Basme", 503.0));
+        }};
+        List<Location> locations4 = new ArrayList<Location>();
+        locations4.add(l1);
+        new Node("D", l4, locations4, employees4).run();
+
+        // nodu 4
+        List<Employee> employees5 = new ArrayList<Employee>() {{
+            add(new Employee("Iron", "Men", "Basme", 503.0));
+        }};
+        List<Location> locations5 = new ArrayList<Location>();
+        locations5.add(l1);
+        new Node("D", l5, locations5, employees5).run();
 
 
        /* DiscoveryListener discoveryListener= new DiscoveryListener(new InetSocketAddress("127.0.0.1", dataServerPort));

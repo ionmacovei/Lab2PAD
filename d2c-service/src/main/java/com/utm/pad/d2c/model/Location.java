@@ -20,8 +20,9 @@ public class Location implements Serializable {
         this.nrRelations=nrRelations;
     }
 
-    public Location(String ipAddress, int port) {
+    public Location(String ipAddress, int port, Integer nrRelations) {
         location = new InetSocketAddress(ipAddress, port);
+        this.nrRelations = nrRelations;
     }
 
     public InetSocketAddress getLocation() {

@@ -1,10 +1,14 @@
 package com.utm.pad.d2c.discovery;
 
+import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import static com.utm.pad.d2c.model.ProtocolConfig.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -29,6 +33,9 @@ public class DiscoveryClient {
         locations = receiveLocations();
 
         if (locations.size() > 0) {
+
+            locations.sort((l1, l2) -> l1.getNrRelations() - l2.getNrRelations());
+            Collections.reverse(locations);
             return locations.get(0);
         } else {
             return null;
