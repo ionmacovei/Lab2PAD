@@ -28,9 +28,7 @@ public class App {
                     "[INFO] Discovered server: " + location);
 
             if (location != null) {
-                showFiltered(
-                        new TransportClient()
-                                .getEmployeesFrom(location));
+                showFiltered(TransportClient.getEmployeesFrom(location, "client"));
             }
 
         } catch (IOException e) {

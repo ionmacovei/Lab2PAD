@@ -13,6 +13,7 @@ import static org.apache.commons.lang3.SerializationUtils.serialize;
 public class DiscoveryListener extends Thread {
     InetSocketAddress dataServerAddress;
 
+
     public DiscoveryListener(InetSocketAddress dataServerAddress) {
         this.dataServerAddress = dataServerAddress;
     }
@@ -27,7 +28,7 @@ public class DiscoveryListener extends Thread {
      * "discovery" listener must send information (address and port) about data
      * transport server.
      */
-    private Location receiveClientRequest() {
+    public Location receiveClientRequest() {
         Location clientLocation = null;
         try {
             MulticastSocket s = new MulticastSocket(PROTOCOL_GROUP_PORT);

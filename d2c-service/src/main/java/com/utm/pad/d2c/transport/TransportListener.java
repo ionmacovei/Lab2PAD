@@ -1,20 +1,34 @@
 package com.utm.pad.d2c.transport;
 
 import com.utm.pad.d2c.model.Employee;
+import com.utm.pad.d2c.model.Location;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class TransportListener extends Thread {
+    ServerSocket serverSocket;
     private int serverPort;
     private boolean isStopped;
     private boolean isAccepted;
-    ServerSocket serverSocket;
+    private List<Location> conectionPorts;
+    private List<Employee> employees;
+
+    public TransportListener(Integer serverPort, List<Location> conectionPorts, List<Employee> employees) {
+        this.conectionPorts = conectionPorts;
+        this.employees = employees;
+
+        this.serverPort = serverPort;
+        isStopped = false;
+    }
 
     public boolean isStopped() {
         return isStopped;
@@ -31,24 +45,40 @@ public class TransportListener extends Thread {
         }
     }
 
-    public TransportListener(int serverPort) {
-        this.serverPort = serverPort;
-        isStopped = false;
-    }
-
     @Override
     public void run() {
 
         try {
             serverSocket = new ServerSocket(serverPort);
             while (!isStopped) {
-                Socket socket = serverSocket.accept();  // Blocking call!
-                // You can use non-blocking approach
+                Socket socket = serverSocket.accept();
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 isAccepted = true;
-                Employee[] s = new Employee[getEmployees().size()];
-                serialize((Employee[]) getEmployees().toArray(s), socket.getOutputStream());
-                socket.close();
-                isAccepted = false;
+                String conectorName = in.readUTF();
+                if (conectorName.equalsIgnoreCase("client")) {
+                    if (conectionPorts.size() >= 1) {
+                        conectionPorts.forEach(location -> {
+                            try {
+                                employees.addAll(TransportClient.getEmployeesFrom(location, "maven"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+
+                    }
+                    Employee[] s = new Employee[employees.size()];
+                    serialize((Employee[]) employees.toArray(s), out);
+                    socket.close();
+                    isAccepted = false;
+                } else {
+                    Employee[] s = new Employee[employees.size()];
+                    serialize((Employee[]) employees.toArray(s), out);
+                    socket.close();
+                    isAccepted = false;
+                }
+
+
             }
         } catch (SocketException e) {
             System.out.println("[WARNING] ----------------------------------------- \n" +
