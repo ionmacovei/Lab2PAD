@@ -5,6 +5,8 @@ import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.transport.TransportListener;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.InetSocketAddress;
@@ -15,6 +17,7 @@ import java.util.concurrent.Callable;
  * Created by imacovei on 15.10.2016.
  */
 @XmlRootElement(name = "Node")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Node implements Runnable {
     @XmlElement(name = "name")
     private String id;
@@ -41,7 +44,7 @@ public class Node implements Runnable {
     public void run() {
         DiscoveryListener discoveryListener = new DiscoveryListener(nodeLocation);
         discoveryListener.start();
-        TransportListener transportListener = new TransportListener(nodeLocation.getLocation().getPort(), locations, employees);
+        TransportListener transportListener = new TransportListener(nodeLocation.getPort(), locations, employees);
         transportListener.start();
     }
 }

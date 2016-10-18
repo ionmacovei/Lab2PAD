@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 public class App1 {
     public static void main(String[] args) {
-        int dataServerPort = 4444;
+     /*   int dataServerPort = 4444;
         if (args.length > 0) {
             dataServerPort = Integer.parseInt(args[0]);
 
@@ -85,12 +85,12 @@ public class App1 {
         nodeList.add(C);
         nodeList.add(D);
         nodeList.add(E);
-        // XmlParser.getXml(nodeList);
+        // XmlParser.getXml(nodeList);*/
 
         File fileWithNodes = new File("config.xml");
         List<Node> nodeList1 = XmlParser.getMesagesFromFile(fileWithNodes);
-
-        // nodeList1.forEach(node -> System.out.println(node.toString()));
+        int nn = 1;
+        nodeList1.forEach(node -> node.run());
 
         try {
             Thread.sleep(SECONDS.toMillis(100));

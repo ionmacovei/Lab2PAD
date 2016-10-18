@@ -22,7 +22,7 @@ public class XmlParser {
         Nodes nodes = new Nodes();
         nodes.setNodeList(nodeList);
         try {
-            JAXBContext contextObj = JAXBContext.newInstance(Nodes.class, Node.class, Employee.class, Location.class, Locations.class);
+            JAXBContext contextObj = JAXBContext.newInstance(Nodes.class, Node.class, Employee.class, Location.class);
             Marshaller marshallerObj = contextObj.createMarshaller();
             marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshallerObj.marshal(nodes, fileWithNodes);

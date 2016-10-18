@@ -63,8 +63,8 @@ public class DiscoveryListener extends Thread {
             DatagramSocket clientSocket = new DatagramSocket();
 
             DatagramPacket pongPacket = new DatagramPacket(sendDataServerAddress,
-                    sendDataServerAddress.length,
-                    clientLocation.getLocation());
+                    sendDataServerAddress.length, new InetSocketAddress(clientLocation.getIpAddres(), clientLocation.getPort())
+            );
             clientSocket.send(pongPacket);
 
             clientSocket.close();

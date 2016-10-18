@@ -58,37 +58,11 @@ public class TransportListener extends Thread {
                 isAccepted = true;
                 String conectorName = in.readUTF();
                 if (conectorName.equalsIgnoreCase("client")) {
-                    if (conectionPorts.size() >= 1) {
-                        conectionPorts.forEach(location -> {
-                            try {
-                                employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
-
-                    }
-                    Employee[] s = new Employee[employees.size()];
-                    serialize((Employee[]) employees.toArray(s), out);
-                    socket.close();
-                    isAccepted = false;
+                    getEmployeFromNodes(socket, out);
                 } else {
                     Integer port = Integer.parseInt(conectorName);
                     deleteMavenFromList(port, conectionPorts);
-                    if (conectionPorts.size() >= 1) {
-                        conectionPorts.forEach(location -> {
-                            try {
-                                employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
-
-                    }
-                    Employee[] s = new Employee[employees.size()];
-                    serialize((Employee[]) employees.toArray(s), out);
-                    socket.close();
-                    isAccepted = false;
+                    getEmployeFromNodes(socket, out);
                 }
 
 
@@ -102,17 +76,42 @@ public class TransportListener extends Thread {
     }
 
     private List<Location> deleteMavenFromList(Integer port, List<Location> locations) {
-
-
         Iterator<Location> l = locations.iterator();
         while (l.hasNext()) {
             Location o = l.next();
-            if (o.getLocation().getPort() == port)
+            if (o.getPort().equals(port))
                 l.remove();
         }
 
         return locations;
     }
+
+    private List<Employee> getEmployeFromNodes(Socket socket, DataOutputStream out) {
+        try {
+            if (conectionPorts.size() >= 1) {
+                conectionPorts.forEach(location -> {
+                    try {
+                        employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+            }
+            Employee[] s = new Employee[employees.size()];
+            serialize((Employee[]) employees.toArray(s), out);
+
+            socket.close();
+            isAccepted = false;
+        } catch (SocketException e) {
+            System.out.println("[WARNING] ----------------------------------------- \n" +
+                    "[WARNING] Waiting time expired... Socket is closed.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     private ArrayList<Employee> getEmployees() {
         return new ArrayList<Employee>() {{

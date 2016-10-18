@@ -5,25 +5,21 @@
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
-            <location/>
             <nrRelations>3</nrRelations>
         </location>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
-            <location/>
             <nrRelations>2</nrRelations>
         </locations>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9004</port>
-            <location/>
             <nrRelations>1</nrRelations>
         </locations>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9005</port>
-            <location/>
             <nrRelations>1</nrRelations>
         </locations>
         <employees>
@@ -44,19 +40,16 @@
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
-            <location/>
             <nrRelations>2</nrRelations>
         </location>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
-            <location/>
             <nrRelations>3</nrRelations>
         </locations>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9003</port>
-            <location/>
             <nrRelations>1</nrRelations>
         </locations>
         <employees>
@@ -83,13 +76,11 @@
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9003</port>
-            <location/>
             <nrRelations>1</nrRelations>
         </location>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
-            <location/>
             <nrRelations>2</nrRelations>
         </locations>
         <employees>
@@ -104,13 +95,11 @@
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9004</port>
-            <location/>
             <nrRelations>1</nrRelations>
         </location>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
-            <location/>
             <nrRelations>3</nrRelations>
         </locations>
         <employees>
@@ -125,13 +114,11 @@
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9005</port>
-            <location/>
             <nrRelations>1</nrRelations>
         </location>
         <locations>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
-            <location/>
             <nrRelations>3</nrRelations>
         </locations>
         <employees>

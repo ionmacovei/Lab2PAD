@@ -12,7 +12,7 @@ import java.util.List;
 @XmlRootElement(name = "Locations")
 public class Locations {
 
-    List<Location> locationsList;
+    public List<Location> locationsList;
 
     public List<Location> getlocationsList() {
         return locationsList;

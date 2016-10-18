@@ -17,12 +17,12 @@ import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class DiscoveryClient {
 
-    private InetSocketAddress clientAddress;
+    private Location clientAddress;
 
     /**
      * @param clientAddress client location where discovery servers send data locations
      */
-    public DiscoveryClient(InetSocketAddress clientAddress) {
+    public DiscoveryClient(Location clientAddress) {
         this.clientAddress = clientAddress;
     }
 
@@ -51,7 +51,7 @@ public class DiscoveryClient {
     private ArrayList<Location> receiveLocations() throws IOException {
 
         ArrayList<Location> locations = new ArrayList<Location>();
-        DatagramSocket datagramServer = new DatagramSocket(clientAddress);
+        DatagramSocket datagramServer = new DatagramSocket(new InetSocketAddress(clientAddress.getIpAddres(), clientAddress.getPort()));
         byte dataFromServer[] = new byte[2048];
         boolean isTimeExpired = false;
         datagramServer.setSoTimeout((int) SECONDS.toMillis(PROTOCOL_GROUP_TIMEOUT));
@@ -87,7 +87,7 @@ public class DiscoveryClient {
 
     private void sendLocationRequest() throws IOException {
         MulticastSocket s = new MulticastSocket();
-        byte sendData[] = serialize(new Location(clientAddress));
+        byte sendData[] = serialize(clientAddress);
         DatagramPacket pingPacket = new DatagramPacket(sendData, sendData.length,
                 InetAddress.getByName(PROTOCOL_GROUP_ADDRESS),
                 PROTOCOL_GROUP_PORT);

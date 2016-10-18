@@ -6,6 +6,7 @@ import com.utm.pad.d2c.model.Location;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class TransportClient {
 
     public static ArrayList<Employee> getEmployeesFrom(Location location, String connectorName) throws IOException {
         Socket socket = new Socket();
-        socket.connect(location.getLocation());
+        socket.connect(new InetSocketAddress(location.getIpAddres(), location.getPort()));
         DataInputStream in = new DataInputStream(socket.getInputStream());
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 

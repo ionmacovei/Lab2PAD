@@ -22,7 +22,7 @@ public class App {
 
         try {
             Location location = new DiscoveryClient(
-                    new InetSocketAddress("127.0.0.1", 33333))
+                    new Location("127.0.0.1", 33333))
                     .retrieveLocation();
             System.out.println("[INFO] -----------------------------------------\n" +
                     "[INFO] Discovered server: " + location);
