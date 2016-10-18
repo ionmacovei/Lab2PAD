@@ -1,10 +1,12 @@
-package com.utm.pad.d2c.config;
+package com.utm.pad.d2c.servernode;
 
 import com.utm.pad.d2c.discovery.DiscoveryListener;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.transport.TransportListener;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -12,15 +14,20 @@ import java.util.concurrent.Callable;
 /**
  * Created by imacovei on 15.10.2016.
  */
+@XmlRootElement(name = "Node")
 public class Node implements Runnable {
-
+    @XmlElement(name = "name")
     private String id;
+    @XmlElement(name = "location")
     private Location nodeLocation;
+    @XmlElement(name = "locations")
     private List<Location> locations;
-    // private List<Location> onlineConnectionPorts;
+    @XmlElement(name = "employees")
     private List<Employee> employees;
-    private boolean discover = true;
 
+    public Node() {
+
+    }
     public Node(String id, Location nodeLocation, List<Location> locations, List<Employee> employees) {
         this.id = id;
         this.nodeLocation = nodeLocation;

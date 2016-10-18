@@ -1,11 +1,11 @@
 package com.utm.pad.d2c;
 
-import com.utm.pad.d2c.discovery.DiscoveryListener;
+import com.utm.pad.d2c.config.XmlParser;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
-import com.utm.pad.d2c.transport.TransportListener;
-import com.utm.pad.d2c.config.*;
-import java.net.InetSocketAddress;
+import com.utm.pad.d2c.servernode.Node;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class App1 {
         locations1.add(l4);
         locations1.add(l5);
 
-        new Node("A", l1, locations1, employees1).run();
+        Node A = new Node("A", l1, locations1, employees1);
         //nodu 2
         List<Employee> employees2 = new ArrayList<Employee>() {{
             add(new Employee("Ileana", "Consinzeana", "Basme", 503.0));
@@ -54,7 +54,7 @@ public class App1 {
         List<Location> locations2 = new ArrayList<Location>();
         locations2.add(l1);
         locations2.add(l3);
-        new Node("B", l2, locations2, employees2).run();
+        Node B = new Node("B", l2, locations2, employees2);
 
         // nodu 3
         List<Employee> employees3 = new ArrayList<Employee>() {{
@@ -62,7 +62,7 @@ public class App1 {
         }};
         List<Location> locations3 = new ArrayList<Location>();
         locations3.add(l2);
-        new Node("C", l3, locations3, employees3).run();
+        Node C = new Node("C", l3, locations3, employees3);
 
         // nodu 4
         List<Employee> employees4 = new ArrayList<Employee>() {{
@@ -70,7 +70,7 @@ public class App1 {
         }};
         List<Location> locations4 = new ArrayList<Location>();
         locations4.add(l1);
-        new Node("D", l4, locations4, employees4).run();
+        Node D = new Node("D", l4, locations4, employees4);
 
         // nodu 4
         List<Employee> employees5 = new ArrayList<Employee>() {{
@@ -78,15 +78,20 @@ public class App1 {
         }};
         List<Location> locations5 = new ArrayList<Location>();
         locations5.add(l1);
-        new Node("D", l5, locations5, employees5).run();
+        Node E = new Node("E", l5, locations5, employees5);
+        List<Node> nodeList = new ArrayList<Node>();
+        nodeList.add(A);
+        nodeList.add(B);
+        nodeList.add(C);
+        nodeList.add(D);
+        nodeList.add(E);
+        // XmlParser.getXml(nodeList);
 
+        File fileWithNodes = new File("config.xml");
+        List<Node> nodeList1 = XmlParser.getMesagesFromFile(fileWithNodes);
 
-       /* DiscoveryListener discoveryListener= new DiscoveryListener(new InetSocketAddress("127.0.0.1", dataServerPort));
-        discoveryListener.start();
+        // nodeList1.forEach(node -> System.out.println(node.toString()));
 
-        TransportListener transportListener = new TransportListener(dataServerPort);
-        transportListener.start();
-*/
         try {
             Thread.sleep(SECONDS.toMillis(100));
         } catch (InterruptedException e) {

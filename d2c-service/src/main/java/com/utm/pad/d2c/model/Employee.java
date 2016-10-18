@@ -1,7 +1,10 @@
 package com.utm.pad.d2c.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+@XmlRootElement(name = "employee")
 public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
     private String firstName;
@@ -23,6 +26,7 @@ public class Employee implements Serializable {
         return firstName;
     }
 
+    @XmlElement(name = "firstname")
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -31,6 +35,7 @@ public class Employee implements Serializable {
         return lastName;
     }
 
+    @XmlElement(name = "lastName")
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -39,6 +44,7 @@ public class Employee implements Serializable {
         return department;
     }
 
+    @XmlElement(name = "departament")
     public void setDepartment(String department) {
         this.department = department;
     }
@@ -47,6 +53,7 @@ public class Employee implements Serializable {
         return salary;
     }
 
+    @XmlElement(name = "salary")
     public void setSalary(Double salary) {
         this.salary = salary;
     }
