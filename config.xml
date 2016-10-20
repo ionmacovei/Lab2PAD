@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ServerNodes>
     <Node>
-        <name>A</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
             <nrRelations>3</nrRelations>
         </location>
-        <locations>
+        <name>A</name>
+        <multicastAddres>224.10.10.5</multicastAddres>
+        <multicastPort>10105</multicastPort>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
             <nrRelations>2</nrRelations>
-        </locations>
-        <locations>
+        </relation>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9004</port>
             <nrRelations>1</nrRelations>
-        </locations>
-        <locations>
+        </relation>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9005</port>
             <nrRelations>1</nrRelations>
-        </locations>
+        </relation>
         <employees>
             <departament>Povesti</departament>
             <firstname>Laur</firstname>
@@ -36,22 +38,24 @@
         </employees>
     </Node>
     <Node>
-        <name>B</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
             <nrRelations>2</nrRelations>
         </location>
-        <locations>
+        <name>B</name>
+        <multicastAddres>224.10.10.5</multicastAddres>
+        <multicastPort>10105</multicastPort>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
             <nrRelations>3</nrRelations>
-        </locations>
-        <locations>
+        </relation>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9003</port>
             <nrRelations>1</nrRelations>
-        </locations>
+        </relation>
         <employees>
             <departament>Basme</departament>
             <firstname>Ileana</firstname>
@@ -72,17 +76,19 @@
         </employees>
     </Node>
     <Node>
-        <name>C</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9003</port>
             <nrRelations>1</nrRelations>
         </location>
-        <locations>
+        <name>C</name>
+        <multicastAddres>224.10.10.5</multicastAddres>
+        <multicastPort>10105</multicastPort>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
             <nrRelations>2</nrRelations>
-        </locations>
+        </relation>
         <employees>
             <departament>Basme</departament>
             <firstname>Ion</firstname>
@@ -91,17 +97,19 @@
         </employees>
     </Node>
     <Node>
-        <name>D</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9004</port>
             <nrRelations>1</nrRelations>
         </location>
-        <locations>
+        <name>D</name>
+        <multicastAddres>224.10.10.5</multicastAddres>
+        <multicastPort>10105</multicastPort>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
             <nrRelations>3</nrRelations>
-        </locations>
+        </relation>
         <employees>
             <departament>Basme</departament>
             <firstname>Vasea</firstname>
@@ -110,17 +118,19 @@
         </employees>
     </Node>
     <Node>
-        <name>E</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9005</port>
             <nrRelations>1</nrRelations>
         </location>
-        <locations>
+        <name>E</name>
+        <multicastAddres>224.10.10.5</multicastAddres>
+        <multicastPort>10105</multicastPort>
+        <relation>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
             <nrRelations>3</nrRelations>
-        </locations>
+        </relation>
         <employees>
             <departament>Basme</departament>
             <firstname>Iron</firstname>

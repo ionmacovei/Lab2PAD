@@ -42,7 +42,8 @@ public class App {
                 list.stream()
                         .filter(e -> e.getSalary() > 500.0)
                         .sorted(Comparator.comparing(Employee::getLastName))
-                        .collect(Collectors.groupingBy(Employee::getDepartment))
+                        // .collect(Collectors.groupingBy(Employee::getDepartment))
+                        .collect(Collectors.toList())
                         .toString()
         );
     }

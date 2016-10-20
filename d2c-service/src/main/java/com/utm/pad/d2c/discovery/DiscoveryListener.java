@@ -5,17 +5,19 @@ import com.utm.pad.d2c.model.Location;
 import java.io.IOException;
 import java.net.*;
 
-import static com.utm.pad.d2c.model.ProtocolConfig.PROTOCOL_GROUP_ADDRESS;
-import static com.utm.pad.d2c.model.ProtocolConfig.PROTOCOL_GROUP_PORT;
+
 import static org.apache.commons.lang3.SerializationUtils.deserialize;
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class DiscoveryListener extends Thread {
     Location dataServerAddress;
+    String PROTOCOL_GROUP_ADDRESS;
+    Integer PROTOCOL_GROUP_PORT;
 
-
-    public DiscoveryListener(Location dataServerAddress) {
+    public DiscoveryListener(Location dataServerAddress, String PROTOCOL_GROUP_ADDRESS, Integer PROTOCOL_GROUP_PORT) {
         this.dataServerAddress = dataServerAddress;
+        this.PROTOCOL_GROUP_ADDRESS = PROTOCOL_GROUP_ADDRESS;
+        this.PROTOCOL_GROUP_PORT = PROTOCOL_GROUP_PORT;
     }
 
     @Override

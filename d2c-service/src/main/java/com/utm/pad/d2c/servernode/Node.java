@@ -9,42 +9,60 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.net.InetSocketAddress;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Created by imacovei on 15.10.2016.
  */
 @XmlRootElement(name = "Node")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Node implements Runnable {
-    @XmlElement(name = "name")
-    private String id;
-    @XmlElement(name = "location")
-    private Location nodeLocation;
-    @XmlElement(name = "locations")
+public class Node extends ServerNode {
+    @XmlElement(name = "multicastAddres")
+    private String multicastAddres;
+    @XmlElement(name = "multicastPort")
+    private Integer multicastPort;
+    /*@XmlElement(name = "location")
+    private Location nodeLocation;*/
+    @XmlElement(name = "relation")
     private List<Location> locations;
     @XmlElement(name = "employees")
     private List<Employee> employees;
-
     public Node() {
 
     }
-    public Node(String id, Location nodeLocation, List<Location> locations, List<Employee> employees) {
-        this.id = id;
-        this.nodeLocation = nodeLocation;
+
+    public Node(String name, String multicastAddres, Integer multicastPort, Location nodeLocation, List<Location> locations, List<Employee> employees) {
+        this.name = name;
+        this.location = nodeLocation;
         this.locations = locations;
         this.employees = employees;
+        this.multicastAddres = multicastAddres;
+        this.multicastPort = multicastPort;
 
 
+    }
+
+    public String getMulticastAddres() {
+        return multicastAddres;
+    }
+
+    public void setMulticastAddres(String multicastAddres) {
+        this.multicastAddres = multicastAddres;
+    }
+
+    public Integer getMulticastPort() {
+        return multicastPort;
+    }
+
+    public void setMulticastPort(Integer multicastPort) {
+        this.multicastPort = multicastPort;
     }
 
     @Override
     public void run() {
-        DiscoveryListener discoveryListener = new DiscoveryListener(nodeLocation);
+        DiscoveryListener discoveryListener = new DiscoveryListener(location, multicastAddres, multicastPort);
         discoveryListener.start();
-        TransportListener transportListener = new TransportListener(nodeLocation.getPort(), locations, employees);
+        TransportListener transportListener = new TransportListener(location.getPort(), locations, employees);
         transportListener.start();
     }
 }

@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 public class App1 {
     public static void main(String[] args) {
-     /*   int dataServerPort = 4444;
+        int dataServerPort = 4444;
         if (args.length > 0) {
             dataServerPort = Integer.parseInt(args[0]);
 
@@ -44,7 +44,7 @@ public class App1 {
         locations1.add(l4);
         locations1.add(l5);
 
-        Node A = new Node("A", l1, locations1, employees1);
+        Node A = new Node("A", "224.10.10.5", 10105, l1, locations1, employees1);
         //nodu 2
         List<Employee> employees2 = new ArrayList<Employee>() {{
             add(new Employee("Ileana", "Consinzeana", "Basme", 503.0));
@@ -54,7 +54,7 @@ public class App1 {
         List<Location> locations2 = new ArrayList<Location>();
         locations2.add(l1);
         locations2.add(l3);
-        Node B = new Node("B", l2, locations2, employees2);
+        Node B = new Node("B", "224.10.10.5", 10105, l2, locations2, employees2);
 
         // nodu 3
         List<Employee> employees3 = new ArrayList<Employee>() {{
@@ -62,7 +62,7 @@ public class App1 {
         }};
         List<Location> locations3 = new ArrayList<Location>();
         locations3.add(l2);
-        Node C = new Node("C", l3, locations3, employees3);
+        Node C = new Node("C", "224.10.10.5", 10105, l3, locations3, employees3);
 
         // nodu 4
         List<Employee> employees4 = new ArrayList<Employee>() {{
@@ -70,7 +70,7 @@ public class App1 {
         }};
         List<Location> locations4 = new ArrayList<Location>();
         locations4.add(l1);
-        Node D = new Node("D", l4, locations4, employees4);
+        Node D = new Node("D", "224.10.10.5", 10105, l4, locations4, employees4);
 
         // nodu 4
         List<Employee> employees5 = new ArrayList<Employee>() {{
@@ -78,14 +78,14 @@ public class App1 {
         }};
         List<Location> locations5 = new ArrayList<Location>();
         locations5.add(l1);
-        Node E = new Node("E", l5, locations5, employees5);
+        Node E = new Node("E", "224.10.10.5", 10105, l5, locations5, employees5);
         List<Node> nodeList = new ArrayList<Node>();
         nodeList.add(A);
         nodeList.add(B);
         nodeList.add(C);
         nodeList.add(D);
         nodeList.add(E);
-        // XmlParser.getXml(nodeList);*/
+        // XmlParser.getXml(nodeList);
 
         File fileWithNodes = new File("config.xml");
         List<Node> nodeList1 = XmlParser.getMesagesFromFile(fileWithNodes);

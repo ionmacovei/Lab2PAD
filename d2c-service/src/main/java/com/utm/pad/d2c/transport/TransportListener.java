@@ -17,6 +17,7 @@ import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class TransportListener extends Thread {
     ServerSocket serverSocket;
+    private String nodeName;
     private int serverPort;
     private boolean isStopped;
     private boolean isAccepted;
@@ -26,9 +27,14 @@ public class TransportListener extends Thread {
     public TransportListener(Integer serverPort, List<Location> conectionPorts, List<Employee> employees) {
         this.conectionPorts = conectionPorts;
         this.employees = employees;
-
         this.serverPort = serverPort;
         isStopped = false;
+    }
+
+    public TransportListener(Integer serverPort, String name) {
+        this.serverPort = serverPort;
+        this.nodeName = name;
+
     }
 
     public boolean isStopped() {
@@ -58,12 +64,38 @@ public class TransportListener extends Thread {
                 isAccepted = true;
                 String conectorName = in.readUTF();
                 if (conectorName.equalsIgnoreCase("client")) {
-                    getEmployeFromNodes(socket, out);
+                    // getEmployeFromNodes(socket, out);
+                    if (conectionPorts.size() >= 1) {
+                        conectionPorts.forEach(location -> {
+                            try {
+                                employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+
+                    }
                 } else {
+                    Employee[] s = new Employee[employees.size()];
+                    serialize((Employee[]) employees.toArray(s), out);
+
+                    socket.close();
+                    isAccepted = false;
+                }
+                Employee[] s = new Employee[employees.size()];
+                serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
+
+                socket.close();
+                isAccepted = false;
+
+
+
+
+               /* else {
                     Integer port = Integer.parseInt(conectorName);
                     deleteMavenFromList(port, conectionPorts);
                     getEmployeFromNodes(socket, out);
-                }
+                }*/
 
 
             }
@@ -86,7 +118,7 @@ public class TransportListener extends Thread {
         return locations;
     }
 
-    private List<Employee> getEmployeFromNodes(Socket socket, DataOutputStream out) {
+   /* private List<Employee> getEmployeFromNodes(Socket socket, DataOutputStream out) {
         try {
             if (conectionPorts.size() >= 1) {
                 conectionPorts.forEach(location -> {
@@ -110,7 +142,7 @@ public class TransportListener extends Thread {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
 
     private ArrayList<Employee> getEmployees() {
