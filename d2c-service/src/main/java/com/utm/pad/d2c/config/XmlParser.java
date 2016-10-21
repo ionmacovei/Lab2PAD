@@ -3,6 +3,7 @@ package com.utm.pad.d2c.config;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.servernode.Node;
+import com.utm.pad.d2c.servernode.ServerNode;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

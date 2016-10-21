@@ -21,14 +21,9 @@ public class App {
                 "[INFO] Client is running...");
 
         try {
-            Location location = new DiscoveryClient(
-                    new Location("127.0.0.1", 33333))
-                    .retrieveLocation();
-            System.out.println("[INFO] -----------------------------------------\n" +
-                    "[INFO] Discovered server: " + location);
-
-            if (location != null) {
-                showFiltered(TransportClient.getEmployeesFrom(location, "client"));
+            Location lcationMediator = new Location("127.0.0.1", 9010);
+            if (lcationMediator != null) {
+                showFiltered(TransportClient.getEmployeesFrom(lcationMediator, "client"));
             }
 
         } catch (IOException e) {
@@ -39,11 +34,7 @@ public class App {
     private static void showFiltered(ArrayList<Employee> list) {
         System.out.println("[Result] -----------------------------------------\n" +
                 "Discovered employees: " +
-                list.stream()
-                        .filter(e -> e.getSalary() > 500.0)
-                        .sorted(Comparator.comparing(Employee::getLastName))
-                        // .collect(Collectors.groupingBy(Employee::getDepartment))
-                        .collect(Collectors.toList())
+                list.stream().collect(Collectors.groupingBy(Employee::getDepartment))
                         .toString()
         );
     }

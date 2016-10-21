@@ -3,10 +3,13 @@ package com.utm.pad.d2c;
 import com.utm.pad.d2c.config.XmlParser;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
+import com.utm.pad.d2c.servernode.Mediator;
 import com.utm.pad.d2c.servernode.Node;
+import com.utm.pad.d2c.servernode.ServerNode;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -18,6 +21,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 public class App1 {
     public static void main(String[] args) {
+
+        Location lcationMediator = new Location("127.0.0.1", 9010);
         int dataServerPort = 4444;
         if (args.length > 0) {
             dataServerPort = Integer.parseInt(args[0]);
@@ -28,6 +33,7 @@ public class App1 {
         Location l3 = new Location("127.0.0.1", 9003, 1);
         Location l4 = new Location("127.0.0.1", 9004, 1);
         Location l5 = new Location("127.0.0.1", 9005, 1);
+
 
 
         // InetSocketAddress serverLocation = new InetSocketAddress("127.0.0.1", dataServerPort);
@@ -85,19 +91,31 @@ public class App1 {
         nodeList.add(C);
         nodeList.add(D);
         nodeList.add(E);
-        // XmlParser.getXml(nodeList);
+        XmlParser.getXml(nodeList);
 
         File fileWithNodes = new File("config.xml");
         List<Node> nodeList1 = XmlParser.getMesagesFromFile(fileWithNodes);
-        int nn = 1;
-        nodeList1.forEach(node -> node.run());
+        List<Location> nodeLocations = new ArrayList<Location>();
+        Iterator<Node> iter = nodeList1.iterator();
+        while (iter.hasNext()) {
+            nodeLocations.add(iter.next().getLocation());
+        }
 
+
+        // ServerNode mediator= new Mediator(lcationMediator,"mediator",nodeLocations);
+        nodeList1.forEach(node -> node.run());
+        try {
+            Thread.sleep(SECONDS.toMillis(4));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new Mediator(lcationMediator, "mediator", nodeLocations).run();
         try {
             Thread.sleep(SECONDS.toMillis(100));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // transportListener.setStopped(true);
+
 
     }
 }

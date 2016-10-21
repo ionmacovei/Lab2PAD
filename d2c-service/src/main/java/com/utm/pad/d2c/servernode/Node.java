@@ -60,8 +60,8 @@ public class Node extends ServerNode {
 
     @Override
     public void run() {
-        DiscoveryListener discoveryListener = new DiscoveryListener(location, multicastAddres, multicastPort);
-        discoveryListener.start();
+//        DiscoveryListener discoveryListener = new DiscoveryListener(location, multicastAddres, multicastPort);
+//        discoveryListener.start();
         TransportListener transportListener = new TransportListener(location.getPort(), locations, employees);
         transportListener.start();
     }

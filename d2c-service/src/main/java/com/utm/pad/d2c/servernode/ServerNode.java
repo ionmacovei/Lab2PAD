@@ -13,4 +13,7 @@ public abstract class ServerNode implements Runnable {
     @XmlElement(name = "location")
     protected Location location;
 
+    public Location getLocation() {
+        return location;
+    }
 }

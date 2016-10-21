@@ -6,13 +6,16 @@ import com.utm.pad.d2c.model.Location;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.apache.commons.lang3.SerializationUtils.deserialize;
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class TransportListener extends Thread {
@@ -31,7 +34,7 @@ public class TransportListener extends Thread {
         isStopped = false;
     }
 
-    public TransportListener(Integer serverPort, String name) {
+    public TransportListener(Integer serverPort, String name, Location mavenLocation) {
         this.serverPort = serverPort;
         this.nodeName = name;
 
@@ -63,40 +66,29 @@ public class TransportListener extends Thread {
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 isAccepted = true;
                 String conectorName = in.readUTF();
-                if (conectorName.equalsIgnoreCase("client")) {
-                    // getEmployeFromNodes(socket, out);
+                if (conectorName.equalsIgnoreCase("mediator")) {
+
                     if (conectionPorts.size() >= 1) {
                         conectionPorts.forEach(location -> {
                             try {
-                                employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
+                                employees.addAll(TransportClient.getEmployeesFrom(location, "maven"));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         });
+                        Employee[] s = new Employee[employees.size()];
+                        serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
 
+                        socket.close();
+                        isAccepted = false;
                     }
-                } else {
+                } else if (conectorName.equalsIgnoreCase("maven")) {
                     Employee[] s = new Employee[employees.size()];
                     serialize((Employee[]) employees.toArray(s), out);
 
                     socket.close();
                     isAccepted = false;
                 }
-                Employee[] s = new Employee[employees.size()];
-                serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
-
-                socket.close();
-                isAccepted = false;
-
-
-
-
-               /* else {
-                    Integer port = Integer.parseInt(conectorName);
-                    deleteMavenFromList(port, conectionPorts);
-                    getEmployeFromNodes(socket, out);
-                }*/
-
 
             }
         } catch (SocketException e) {
@@ -106,44 +98,6 @@ public class TransportListener extends Thread {
             e.printStackTrace();
         }
     }
-
-    private List<Location> deleteMavenFromList(Integer port, List<Location> locations) {
-        Iterator<Location> l = locations.iterator();
-        while (l.hasNext()) {
-            Location o = l.next();
-            if (o.getPort().equals(port))
-                l.remove();
-        }
-
-        return locations;
-    }
-
-   /* private List<Employee> getEmployeFromNodes(Socket socket, DataOutputStream out) {
-        try {
-            if (conectionPorts.size() >= 1) {
-                conectionPorts.forEach(location -> {
-                    try {
-                        employees.addAll(TransportClient.getEmployeesFrom(location, String.valueOf(serverPort)));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-
-            }
-            Employee[] s = new Employee[employees.size()];
-            serialize((Employee[]) employees.toArray(s), out);
-
-            socket.close();
-            isAccepted = false;
-        } catch (SocketException e) {
-            System.out.println("[WARNING] ----------------------------------------- \n" +
-                    "[WARNING] Waiting time expired... Socket is closed.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
-
 
     private ArrayList<Employee> getEmployees() {
         return new ArrayList<Employee>() {{
