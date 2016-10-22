@@ -14,3 +14,8 @@ Pentru a rula proectul din commandline se executa comanda:
  
  `- d2c.jar`-numele jarului  **intregului proiect**
 
+##O metoda mai simpla de  aa vedea cum functioneza proiectul este:
+1) Descarci  jarul  [Descarca](https://github.com/ionmacovei/Lab2PAD/raw/master/out/artifacts/dis_jar/d2c.jar)   
+2) Rulezi comenzile :
+ -`java -cp d2c.jar com.utm.pad.d2c.App1`
+ -`java -cp d2c.jar com.utm.pad.d2c.App`
