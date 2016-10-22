@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ServerNodes>
     <Node>
+        <name>A</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9001</port>
             <nrRelations>3</nrRelations>
         </location>
-        <name>A</name>
         <multicastAddres>224.10.10.5</multicastAddres>
         <multicastPort>10105</multicastPort>
         <relation>
@@ -38,12 +38,12 @@
         </employees>
     </Node>
     <Node>
+        <name>B</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9002</port>
             <nrRelations>2</nrRelations>
         </location>
-        <name>B</name>
         <multicastAddres>224.10.10.5</multicastAddres>
         <multicastPort>10105</multicastPort>
         <relation>
@@ -76,12 +76,12 @@
         </employees>
     </Node>
     <Node>
+        <name>C</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9003</port>
             <nrRelations>1</nrRelations>
         </location>
-        <name>C</name>
         <multicastAddres>224.10.10.5</multicastAddres>
         <multicastPort>10105</multicastPort>
         <relation>
@@ -97,12 +97,12 @@
         </employees>
     </Node>
     <Node>
+        <name>D</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9004</port>
             <nrRelations>1</nrRelations>
         </location>
-        <name>D</name>
         <multicastAddres>224.10.10.5</multicastAddres>
         <multicastPort>10105</multicastPort>
         <relation>
@@ -118,12 +118,12 @@
         </employees>
     </Node>
     <Node>
+        <name>E</name>
         <location>
             <ipAddres>127.0.0.1</ipAddres>
             <port>9005</port>
             <nrRelations>1</nrRelations>
         </location>
-        <name>E</name>
         <multicastAddres>224.10.10.5</multicastAddres>
         <multicastPort>10105</multicastPort>
         <relation>

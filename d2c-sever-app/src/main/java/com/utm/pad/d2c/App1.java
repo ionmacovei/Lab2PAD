@@ -23,7 +23,7 @@ public class App1 {
     public static void main(String[] args) {
 
         Location lcationMediator = new Location("127.0.0.1", 9010);
-        int dataServerPort = 4444;
+       /* int dataServerPort = 4444;
         if (args.length > 0) {
             dataServerPort = Integer.parseInt(args[0]);
 
@@ -92,7 +92,7 @@ public class App1 {
         nodeList.add(D);
         nodeList.add(E);
         XmlParser.getXml(nodeList);
-
+*/
         File fileWithNodes = new File("config.xml");
         List<Node> nodeList1 = XmlParser.getMesagesFromFile(fileWithNodes);
         List<Location> nodeLocations = new ArrayList<Location>();
@@ -104,11 +104,7 @@ public class App1 {
 
         // ServerNode mediator= new Mediator(lcationMediator,"mediator",nodeLocations);
         nodeList1.forEach(node -> node.run());
-        try {
-            Thread.sleep(SECONDS.toMillis(4));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         new Mediator(lcationMediator, "mediator", nodeLocations).run();
         try {
             Thread.sleep(SECONDS.toMillis(100));

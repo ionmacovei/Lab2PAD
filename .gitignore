@@ -31,8 +31,7 @@
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
-
+/target/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -51,7 +50,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+
 *.war
 *.ear
 
