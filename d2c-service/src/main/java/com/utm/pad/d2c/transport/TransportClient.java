@@ -23,6 +23,7 @@ public class TransportClient {
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
         out.writeUTF(connectorName);
+        //  System.out.println(connectorName);
         Employee[] employees = (Employee[]) deserialize(in);
         socket.close();
         return new ArrayList<Employee>(Arrays.asList(employees));

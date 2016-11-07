@@ -1,10 +1,12 @@
 package com.utm.pad.d2c.servernode;
 
+import com.utm.pad.d2c.dslservices.DslServer;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.transport.TransportClient;
-import com.utm.pad.d2c.transport.TransportListener;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,8 +24,8 @@ import static org.apache.commons.lang3.SerializationUtils.serialize;
  */
 public class Mediator extends ServerNode {
 
-    private List<Location> noadeLocations;
     ServerSocket serverSocket;
+    private List<Location> noadeLocations;
     private boolean isStopped;
     private boolean isAccepted;
     private List<Employee> employees;
@@ -35,6 +37,15 @@ public class Mediator extends ServerNode {
 
     }
 
+    private static List<Employee> filterEmployee(ArrayList<Employee> list) {
+
+        List<Employee> filtredList = list.stream()
+                .filter(e -> e.getSalary() > 500.0)
+                .sorted(Comparator.comparing(Employee::getLastName))
+                .collect(Collectors.toList());
+        return filtredList;
+    }
+
     @Override
     public void run() {
         employees = new ArrayList<Employee>();
@@ -42,12 +53,15 @@ public class Mediator extends ServerNode {
         try {
             serverSocket = new ServerSocket(location.getPort());
             while (!isStopped) {
-                Socket socket = serverSocket.accept();  // Blocking call!
-                // You can use non-blocking approach
+                Socket socket = serverSocket.accept();
+
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());// Blocking call!
+                String request = in.readUTF();
+
                 isAccepted = true;
 
-                employees.addAll(TransportClient.getEmployeesFrom(getMavenLoaction(noadeLocations), "mediator"));
-                employees = filterEmployee((ArrayList<Employee>) employees);
+                employees.addAll(TransportClient.getEmployeesFrom(getMavenLoaction(noadeLocations), DslServer.requestTrensfer(request, "mediator")));
                 Employee[] s = new Employee[employees.size()];
                 serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
                 socket.close();
@@ -70,14 +84,5 @@ public class Mediator extends ServerNode {
             return null;
         }
 
-    }
-
-    private static List<Employee> filterEmployee(ArrayList<Employee> list) {
-
-        List<Employee> filtredList = list.stream()
-                .filter(e -> e.getSalary() > 500.0)
-                .sorted(Comparator.comparing(Employee::getLastName))
-                .collect(Collectors.toList());
-        return filtredList;
     }
 }

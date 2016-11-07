@@ -1,14 +1,10 @@
 package com.utm.pad.d2c.discovery;
 
-import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 import static com.utm.pad.d2c.model.ProtocolConfig.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -31,7 +27,7 @@ public class DiscoveryClient {
 
         sendLocationRequest();
         locations = receiveLocations();
-
+/*
         if (locations.size() > 0) {
 
             locations.sort((l1, l2) -> l1.getNrRelations() - l2.getNrRelations());
@@ -39,7 +35,8 @@ public class DiscoveryClient {
             return locations.get(0);
         } else {
             return null;
-        }
+        }*/
+        return null;
     }
 
     /**
@@ -80,7 +77,7 @@ public class DiscoveryClient {
 
     /**
      * Sends UDP multicast request to node group of distributed system.
-     * Request includes client address used by discovery listener.
+     * todelete includes client address used by discovery listener.
      *
      * @throws IOException
      */

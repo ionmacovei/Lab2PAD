@@ -1,6 +1,9 @@
 package com.utm.pad.d2c;
 
 import com.utm.pad.d2c.config.XmlParser;
+import com.utm.pad.d2c.dslservices.DslClient;
+import com.utm.pad.d2c.dslservices.DslServer;
+import com.utm.pad.d2c.dslservices.procesing.Request;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.servernode.Mediator;
@@ -102,10 +105,12 @@ public class App1 {
         }
 
 
-        // ServerNode mediator= new Mediator(lcationMediator,"mediator",nodeLocations);
+        ServerNode mediator = new Mediator(lcationMediator, "mediator", nodeLocations);
         nodeList1.forEach(node -> node.run());
 
         new Mediator(lcationMediator, "mediator", nodeLocations).run();
+        System.out.println(DslClient.getRequestForClient());
+        Request r = DslServer.getRequestfromString(DslClient.getRequestForClient());
         try {
             Thread.sleep(SECONDS.toMillis(100));
         } catch (InterruptedException e) {

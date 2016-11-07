@@ -1,7 +1,7 @@
 # Lab2PAD
-- ## Pentru a rula proiectul ai nevoie de:
-- #### 1)JAVA jdk 1.8+
-- #### 2)Maven(sau un IDE care are Mavenul by default cum sunt Intellij sau Eclipse)
+- ##Pentru a rula proiectul ai nevoie de:
+- ####1)JAVA jdk 1.8+
+- ####2)Maven(sau un IDE care are Mavenul by default cum sunt Intellij sau Eclipse)
 
 - `Instal pentru jdk :` [instal jdk](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - `Instal pentru Maven :`[instal Maven](https://maven.apache.org/download.cgi)

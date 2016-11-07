@@ -1,21 +1,18 @@
 package com.utm.pad.d2c.transport;
 
+import com.utm.pad.d2c.dslservices.DslServer;
+import com.utm.pad.d2c.dslservices.procesing.Request;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-import static org.apache.commons.lang3.SerializationUtils.deserialize;
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class TransportListener extends Thread {
@@ -65,26 +62,33 @@ public class TransportListener extends Thread {
                 DataInputStream in = new DataInputStream(socket.getInputStream());
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 isAccepted = true;
-                String conectorName = in.readUTF();
-                if (conectorName.equalsIgnoreCase("mediator")) {
+                String request = in.readUTF();
+                // System.out.println(request);
+                Request req = DslServer.getRequestfromString(request);
+
+                if (req.getName().equalsIgnoreCase("mediator")) {
+
 
                     if (conectionPorts.size() >= 1) {
                         conectionPorts.forEach(location -> {
                             try {
-                                employees.addAll(TransportClient.getEmployeesFrom(location, "maven"));
+                                employees.addAll(TransportClient.getEmployeesFrom(location, DslServer.requestTrensfer(request, "maven")));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         });
-                        Employee[] s = new Employee[employees.size()];
-                        serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
+                        List<Employee> prosesedEmployeesList = req.getData(employees);
+                        Employee[] s = new Employee[prosesedEmployeesList.size()];
+                        serialize((Employee[]) prosesedEmployeesList.toArray(s), out);
 
                         socket.close();
                         isAccepted = false;
                     }
-                } else if (conectorName.equalsIgnoreCase("maven")) {
+                } else if (req.getName().equalsIgnoreCase("maven")) {
+
+
                     Employee[] s = new Employee[employees.size()];
-                    serialize((Employee[]) employees.toArray(s), out);
+                    serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
 
                     socket.close();
                     isAccepted = false;
@@ -92,6 +96,7 @@ public class TransportListener extends Thread {
 
             }
         } catch (SocketException e) {
+            e.printStackTrace();
             System.out.println("[WARNING] ----------------------------------------- \n" +
                     "[WARNING] Waiting time expired... Socket is closed.");
         } catch (IOException e) {
@@ -99,13 +104,5 @@ public class TransportListener extends Thread {
         }
     }
 
-    private ArrayList<Employee> getEmployees() {
-        return new ArrayList<Employee>() {{
-            add(new Employee("Laur", "Balaur", "Povesti", 501.0));
-            add(new Employee("Fat", "Frumos", "Basme", 502.0));
-            add(new Employee("Ileana", "Consinzeana", "Basme", 503.0));
-            add(new Employee("Danila", "Prepeleac", "Basme", 304.0));
-            add(new Employee("Ivan", "Turbinca", "Povesti", 505.0));
-        }};
-    }
+
 }
