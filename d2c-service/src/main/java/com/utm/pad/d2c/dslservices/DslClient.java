@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utm.pad.d2c.dslservices.procesing.All;
 import com.utm.pad.d2c.dslservices.procesing.Filter;
 import com.utm.pad.d2c.dslservices.procesing.Request;
+import com.utm.pad.d2c.dslservices.procesing.Sort;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,10 +22,11 @@ public class DslClient {
 
         try {
 
-            Request req = new All("client");//new Filter("client",500,">");
-
+            Request req = new All("client");//
+            Request r = new Filter("client", 500, ">");
+            Request request = new Sort("client", "firstName", "desc");
             ObjectMapper mapper = new ObjectMapper();
-            String jsonInString = mapper.writeValueAsString(req);
+            String jsonInString = mapper.writeValueAsString(request);
             return jsonInString;
         } catch (JsonGenerationException e) {
             e.printStackTrace();

@@ -15,7 +15,8 @@ import java.util.List;
         property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Filter.class, name = "filtru"),
-        @JsonSubTypes.Type(value = All.class, name = "all")})
+        @JsonSubTypes.Type(value = All.class, name = "all"),
+        @JsonSubTypes.Type(value = Sort.class, name = "sortare")})
 public interface Request {
     List<Employee> getData(List<Employee> employees);
 
