@@ -95,6 +95,7 @@ public class App1 {
         nodeList.add(D);
         nodeList.add(E);
         XmlParser.getXml(nodeList);
+
 */
         File fileWithNodes = new File("config.xml");
         List<Node> nodeList1 = XmlParser.getMesagesFromFile(fileWithNodes);
