@@ -1,15 +1,12 @@
 package com.utm.pad.d2c;
 
-import com.utm.pad.d2c.discovery.DiscoveryClient;
+
 import com.utm.pad.d2c.dslservices.DslClient;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.transport.TransportClient;
-
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 /**

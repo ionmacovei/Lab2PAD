@@ -16,13 +16,13 @@ import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class TransportClient {
 
-    public static ArrayList<Employee> getEmployeesFrom(Location location, String connectorName) throws IOException {
+    public static ArrayList<Employee> getEmployeesFrom(Location location, String request) throws IOException {
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress(location.getIpAddres(), location.getPort()));
         DataInputStream in = new DataInputStream(socket.getInputStream());
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-        out.writeUTF(connectorName);
+        out.writeUTF(request);
         //  System.out.println(connectorName);
         Employee[] employees = (Employee[]) deserialize(in);
         socket.close();
