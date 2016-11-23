@@ -5,6 +5,7 @@ import com.utm.pad.d2c.dslservices.DslServer;
 import com.utm.pad.d2c.dslservices.procesing.Request;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
+import com.utm.pad.d2c.serialisation.EmployeeSerialisator;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -24,6 +25,7 @@ public class TransportListener extends Thread {
     private boolean isAccepted;
     private List<Location> conectionPorts;
     private List<Employee> employees;
+    EmployeeSerialisator empSerialisator;
 
     public TransportListener(Integer serverPort, List<Location> conectionPorts, List<Employee> employees) {
         this.conectionPorts = conectionPorts;
