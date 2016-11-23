@@ -1,5 +1,6 @@
 package com.utm.pad.d2c.transport;
 
+import com.utm.pad.d2c.dslservices.DslClient;
 import com.utm.pad.d2c.dslservices.DslServer;
 import com.utm.pad.d2c.dslservices.procesing.Request;
 import com.utm.pad.d2c.model.Employee;
@@ -78,7 +79,9 @@ public class TransportListener extends Thread {
                             }
                         });
                         List<Employee> prosesedEmployeesList = req.getData(employees);
+
                         Employee[] s = new Employee[prosesedEmployeesList.size()];
+
                         serialize((Employee[]) prosesedEmployeesList.toArray(s), out);
 
                         socket.close();
@@ -86,9 +89,8 @@ public class TransportListener extends Thread {
                     }
                 } else if (req.getName().equalsIgnoreCase("maven")) {
 
-
                     Employee[] s = new Employee[employees.size()];
-                    serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
+                    serialize(DslClient.getRequestForClient(employees), socket.getOutputStream());
 
                     socket.close();
                     isAccepted = false;

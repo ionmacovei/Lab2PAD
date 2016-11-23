@@ -18,15 +18,15 @@ import java.util.Map;
 public class DslClient {
 
 
-    public static String getRequestForClient() {
+    public static String getRequestForClient(Object objToString) {
 
         try {
 
-            Request req = new All("client");//
-            Request r = new Filter("client", 500, ">");
-            Request request = new Sort("client", "firstName", "desc");
+           /* Request req = new All("client");//
+            Request r = new Filter("client", 500, "<");
+            Request request = new Sort("client", "firstName", "desc");*/
             ObjectMapper mapper = new ObjectMapper();
-            String jsonInString = mapper.writeValueAsString(request);
+            String jsonInString = mapper.writeValueAsString(objToString);
             return jsonInString;
         } catch (JsonGenerationException e) {
             e.printStackTrace();

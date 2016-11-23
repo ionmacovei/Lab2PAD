@@ -96,27 +96,7 @@
             <salary>503.0</salary>
         </employees>
     </Node>
-    <Node>
-        <name>D</name>
-        <location>
-            <ipAddres>127.0.0.1</ipAddres>
-            <port>9004</port>
-            <nrRelations>1</nrRelations>
-        </location>
-        <multicastAddres>224.10.10.5</multicastAddres>
-        <multicastPort>10105</multicastPort>
-        <relation>
-            <ipAddres>127.0.0.1</ipAddres>
-            <port>9001</port>
-            <nrRelations>3</nrRelations>
-        </relation>
-        <employees>
-            <departament>Basme</departament>
-            <firstname>Vasea</firstname>
-            <lastName>vasea</lastName>
-            <salary>503.0</salary>
-        </employees>
-    </Node>
+
     <Node>
         <name>E</name>
         <location>

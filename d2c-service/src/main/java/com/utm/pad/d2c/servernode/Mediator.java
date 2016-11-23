@@ -37,14 +37,7 @@ public class Mediator extends ServerNode {
 
     }
 
-    private static List<Employee> filterEmployee(ArrayList<Employee> list) {
 
-        List<Employee> filtredList = list.stream()
-                .filter(e -> e.getSalary() > 500.0)
-                .sorted(Comparator.comparing(Employee::getLastName))
-                .collect(Collectors.toList());
-        return filtredList;
-    }
 
     @Override
     public void run() {
@@ -61,7 +54,7 @@ public class Mediator extends ServerNode {
 
                 isAccepted = true;
 
-                employees.addAll(TransportClient.getEmployeesFrom(getMavenLoaction(noadeLocations), DslServer.requestTrensfer(request, "mediator")));
+                employees.addAll(TransportClient.getEmployees(getMavenLoaction(noadeLocations), DslServer.requestTrensfer(request, "mediator")));
                 Employee[] s = new Employee[employees.size()];
                 serialize((Employee[]) employees.toArray(s), socket.getOutputStream());
                 socket.close();

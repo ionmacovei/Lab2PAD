@@ -110,8 +110,8 @@ public class App1 {
         nodeList1.forEach(node -> node.run());
 
         new Mediator(lcationMediator, "mediator", nodeLocations).run();
-        System.out.println(DslClient.getRequestForClient());
-        Request r = DslServer.getRequestfromString(DslClient.getRequestForClient());
+        //System.out.println(DslClient.getRequestForClient());
+        // Request r = DslServer.getRequestfromString(DslClient.getRequestForClient());
         try {
             Thread.sleep(SECONDS.toMillis(100));
         } catch (InterruptedException e) {

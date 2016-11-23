@@ -2,6 +2,7 @@ package com.utm.pad.d2c;
 
 
 import com.utm.pad.d2c.dslservices.DslClient;
+import com.utm.pad.d2c.dslservices.procesing.All;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
 import com.utm.pad.d2c.transport.TransportClient;
@@ -21,7 +22,7 @@ public class App {
         try {
             Location lcationMediator = new Location("127.0.0.1", 9010);
             if (lcationMediator != null) {
-                showFiltered(TransportClient.getEmployeesFrom(lcationMediator, DslClient.getRequestForClient()));
+                showFiltered(TransportClient.getEmployees(lcationMediator, DslClient.getRequestForClient(new All("client"))));
             }
 
         } catch (IOException e) {

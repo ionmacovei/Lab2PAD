@@ -17,6 +17,7 @@ import java.util.List;
 @XmlRootElement(name = "Node")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Node extends ServerNode {
+
     @XmlElement(name = "multicastAddres")
     private String multicastAddres;
     @XmlElement(name = "multicastPort")
