@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utm.pad.d2c.model.Employee;
 import com.utm.pad.d2c.model.Location;
+import com.utm.pad.d2c.serialisation.EmployeeSerialisator;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -33,21 +34,14 @@ public class TransportClient {
 
     }
 
-    public static ArrayList<Employee> getEmployeesFrom(Location location, String request) throws IOException {
+    public static ArrayList<Employee> getEmployeesFrom(Location location) throws IOException {
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress(location.getIpAddres(), location.getPort()));
-        DataInputStream in = new DataInputStream(socket.getInputStream());
-        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+        EmployeeSerialisator serializedEmployee = deserialize(socket.getInputStream());
+        System.out.println(serializedEmployee.getEmployeeList() + "/n/n");
 
-        out.writeUTF(request);
-        //  System.out.println(connectorName);
-        String employees = deserialize(in);
-        ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<Employee>> mapType = new TypeReference<List<Employee>>() {
-        };
-        List<Employee> jsonToEmployeeList = objectMapper.readValue(employees, mapType);
         socket.close();
-        return new ArrayList<Employee>(jsonToEmployeeList);
+        return serializedEmployee.deserializeObjects();
 
     }
 }

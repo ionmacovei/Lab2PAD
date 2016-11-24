@@ -2,6 +2,7 @@ package com.utm.pad.d2c.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,14 +11,14 @@ import java.util.List;
 @XmlRootElement(name = "Employees")
 public class EmployeeList {
 
-    List<Employee> employeeList;
+    ArrayList<Employee> employeeList;
 
-    public List<Employee> getEmployeeList() {
+    public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
 
     @XmlElement(name = "employee")
-    public void setEmployeeList(List<Employee> employeeList) {
+    public void setEmployeeList(ArrayList<Employee> employeeList) {
         this.employeeList = employeeList;
     }
 
