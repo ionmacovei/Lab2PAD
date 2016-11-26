@@ -26,15 +26,15 @@
         </relation>
         <employees>
             <departament>Povesti</departament>
-            <firstname>Laur</firstname>
+            <firstName>Laur</firstName>
             <lastName>Balaur</lastName>
-            <salary>501.0</salary>
+            <salary>500</salary>
         </employees>
         <employees>
             <departament>Basme</departament>
-            <firstname>Fat</firstname>
+            <firstName>Fat</firstName>
             <lastName>Frumos</lastName>
-            <salary>502.0</salary>
+            <salary>700</salary>
         </employees>
     </Node>
     <Node>
@@ -58,21 +58,21 @@
         </relation>
         <employees>
             <departament>Basme</departament>
-            <firstname>Ileana</firstname>
+            <firstName>Ileana</firstName>
             <lastName>Consinzeana</lastName>
-            <salary>503.0</salary>
+            <salary>503</salary>
         </employees>
         <employees>
             <departament>Basme</departament>
-            <firstname>Danila</firstname>
+            <firstName>Danila</firstName>
             <lastName>Prepeleac</lastName>
-            <salary>304.0</salary>
+            <salary>304</salary>
         </employees>
         <employees>
             <departament>Povesti</departament>
-            <firstname>Ivan</firstname>
+            <firstName>Ivan</firstName>
             <lastName>Turbinca</lastName>
-            <salary>505.0</salary>
+            <salary>505</salary>
         </employees>
     </Node>
     <Node>
@@ -91,9 +91,9 @@
         </relation>
         <employees>
             <departament>Basme</departament>
-            <firstname>Ion</firstname>
+            <firstName>Ion</firstName>
             <lastName>Macovei</lastName>
-            <salary>503.0</salary>
+            <salary>503</salary>
         </employees>
     </Node>
 
@@ -113,9 +113,9 @@
         </relation>
         <employees>
             <departament>Basme</departament>
-            <firstname>Iron</firstname>
+            <firstName>Iron</firstName>
             <lastName>Men</lastName>
-            <salary>503.0</salary>
+            <salary>503</salary>
         </employees>
     </Node>
 </ServerNodes>

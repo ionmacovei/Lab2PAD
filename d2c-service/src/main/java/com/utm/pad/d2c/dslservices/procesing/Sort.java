@@ -1,6 +1,7 @@
 package com.utm.pad.d2c.dslservices.procesing;
 
 import com.utm.pad.d2c.model.Employee;
+import com.utm.pad.d2c.serialisation.EmployeeSerialisator;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -15,46 +16,16 @@ public class Sort implements Request {
     private String nameAtribut;
     private String typeSort;
 
+    private EmployeeSerialisator serialisatorType;
+
     public Sort() {
     }
 
-    public Sort(String name, String nameAtribut, String typeSort) {
+    public Sort(String name, String nameAtribut, String typeSort, EmployeeSerialisator serialisatorType) {
         this.name = name;
         this.nameAtribut = nameAtribut;
         this.typeSort = typeSort;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNameAtribut() {
-        return nameAtribut;
-    }
-
-    public void setNameAtribut(String nameAtribut) {
-        this.nameAtribut = nameAtribut;
-    }
-
-    public String getTypeSort() {
-        return typeSort;
-    }
-
-    public void setTypeSort(String typeSort) {
-        this.typeSort = typeSort;
-    }
-
-    @Override
-    public List<Employee> getData(List<Employee> employees) {
-        sortList(employees, nameAtribut);
-        if (typeSort.equalsIgnoreCase("desc")) {
-            Collections.reverse(employees);
-        }
-        return employees;
+        this.serialisatorType = serialisatorType;
     }
 
     public static <T> void sortList(List<T> list, final String propertyName) {
@@ -102,5 +73,46 @@ public class Sort implements Request {
             }
         }
         return result;
+    }
+
+    public EmployeeSerialisator getSerialisatorType() {
+        return serialisatorType;
+    }
+
+    public void setSerialisatorType(EmployeeSerialisator serialisatorType) {
+        this.serialisatorType = serialisatorType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNameAtribut() {
+        return nameAtribut;
+    }
+
+    public void setNameAtribut(String nameAtribut) {
+        this.nameAtribut = nameAtribut;
+    }
+
+    public String getTypeSort() {
+        return typeSort;
+    }
+
+    public void setTypeSort(String typeSort) {
+        this.typeSort = typeSort;
+    }
+
+    @Override
+    public List<Employee> getData(List<Employee> employees) {
+        sortList(employees, nameAtribut);
+        if (typeSort.equalsIgnoreCase("desc")) {
+            Collections.reverse(employees);
+        }
+        return employees;
     }
 }

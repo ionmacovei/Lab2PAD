@@ -1,16 +1,30 @@
 package com.utm.pad.d2c.serialisation;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.utm.pad.d2c.model.Employee;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 /**
  * Created by imacovei on 23.11.2016.
  */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = EmployeeJsonSerialisator.class, name = "json"),
+        @JsonSubTypes.Type(value = EmployeeXmlSerialisator.class, name = "xml"),})
 public interface EmployeeSerialisator extends Serializable {
-    public String serializeObjects(Object objToString);
+    String serializeObjects(Object objToString);
 
-    public ArrayList<Employee> deserializeObjects();
+    ArrayList<Employee> deserializeObjects();
 
-    public String getEmployeeList();
+    String getEmployeeList();
+
+    Boolean validate();
+
+
 }

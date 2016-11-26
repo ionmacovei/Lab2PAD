@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.SerializationUtils.serialize;
 
 public class TransportListener extends Thread {
     ServerSocket serverSocket;
-    EmployeeSerialisator serialisatorJSON;
+    EmployeeSerialisator serialisatorJSON = new EmployeeJsonSerialisator();
     EmployeeSerialisator serialisatorXML = new EmployeeXmlSerialisator();
     private String nodeName;
     private int serverPort;
@@ -32,24 +32,9 @@ public class TransportListener extends Thread {
         isStopped = false;
     }
 
-    public boolean isStopped() {
-        return isStopped;
-    }
-
-    public void setStopped(boolean isStopped) {
-        this.isStopped = isStopped;
-        if (!isAccepted) {
-            try {
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     @Override
     public void run() {
-        serialisatorJSON = new EmployeeJsonSerialisator(new EmployeeJsonSerialisator().serializeObjects(employees));
+        serialisatorJSON.serializeObjects(employees);
         serialisatorXML.serializeObjects(employees);
         try {
             serverSocket = new ServerSocket(serverPort);

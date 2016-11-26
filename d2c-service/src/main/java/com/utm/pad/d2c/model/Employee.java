@@ -12,9 +12,9 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
     private String department;
-    private Double salary;
+    private Integer salary;
 
-    public Employee(String firstName, String lastName, String departament, Double salary) {
+    public Employee(String firstName, String lastName, String departament, Integer salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = departament;
@@ -28,7 +28,7 @@ public class Employee implements Serializable {
         return firstName;
     }
 
-    @XmlElement(name = "firstname")
+    @XmlElement(name = "firstName")
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -51,12 +51,12 @@ public class Employee implements Serializable {
         this.department = department;
     }
 
-    public Double getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
     @XmlElement(name = "salary")
-    public void setSalary(Double salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 

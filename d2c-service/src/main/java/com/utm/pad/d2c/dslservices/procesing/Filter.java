@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by imacovei on 07.11.2016.
  */
-public class Filter implements Request {
+public class Filter {
     private String name;
     private Integer filterValue;
     private String comparatorSign;
@@ -49,7 +49,7 @@ public class Filter implements Request {
         this.comparatorSign = comparatorSign;
     }
 
-    @Override
+
     public List<Employee> getData(List<Employee> employees) {
         if (comparatorSign.equalsIgnoreCase("<")) {
             List<Employee> filtredList = employees.stream()
