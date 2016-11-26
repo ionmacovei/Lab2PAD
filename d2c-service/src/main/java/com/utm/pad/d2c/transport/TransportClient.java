@@ -21,6 +21,7 @@ public class TransportClient {
      * se foloseste pentru a primi date  intrun anumit format,prelucrate conform  specificatiilor din request
      *
      * @param location
+     *
      * @param request
      * @return
      * @throws IOException
